@@ -33,3 +33,9 @@ saved_model/**/* filter=lfs diff=lfs merge=lfs -text
 *.zip filter=lfs diff=lfs merge=lfs -text
 *.zst filter=lfs diff=lfs merge=lfs -text
 *tfevents* filter=lfs diff=lfs merge=lfs -text
+prompts/conversational_a.wav filter=lfs diff=lfs merge=lfs -text
+prompts/conversational_b.wav filter=lfs diff=lfs merge=lfs -text
+prompts/read_speech_a.wav filter=lfs diff=lfs merge=lfs -text
+prompts/read_speech_b.wav filter=lfs diff=lfs merge=lfs -text
+prompts/read_speech_c.wav filter=lfs diff=lfs merge=lfs -text
+prompts/read_speech_d.wav filter=lfs diff=lfs merge=lfs -text

@@ -113,6 +113,29 @@ def infer(
     audio_prompt_speaker_b,
     gen_conversation_input,
 ) -> tuple[np.ndarray, int]:
+    # Estimate token limit, otherwise failure might happen after many utterances have been generated.
+    if len(gen_conversation_input.strip() + text_prompt_speaker_a.strip() + text_prompt_speaker_b.strip()) >= 2000:
+        raise gr.Error("Prompts and conversation too long.", duration=30)
+
+    try:
+        return _infer(
+            text_prompt_speaker_a,
+            text_prompt_speaker_b,
+            audio_prompt_speaker_a,
+            audio_prompt_speaker_b,
+            gen_conversation_input,
+        )
+    except ValueError as e:
+        raise gr.Error(f"Error generating audio: {e}", duration=120)
+
+
+def _infer(
+    text_prompt_speaker_a,
+    text_prompt_speaker_b,
+    audio_prompt_speaker_a,
+    audio_prompt_speaker_b,
+    gen_conversation_input,
+) -> tuple[np.ndarray, int]:
     audio_prompt_a = prepare_prompt(text_prompt_speaker_a, 0, audio_prompt_speaker_a)
     audio_prompt_b = prepare_prompt(text_prompt_speaker_b, 1, audio_prompt_speaker_b)
 
@@ -128,6 +151,7 @@ def infer(
             text=line,
             speaker=speaker_id,
             context=prompt_segments + generated_segments,
+            max_audio_length_ms=30_000,
         )
         generated_segments.append(Segment(text=line, speaker=speaker_id, audio=audio_tensor))
 
@@ -215,6 +239,7 @@ with gr.Blocks() as app:
 
     gen_conversation_input = gr.TextArea(label="conversation", lines=20, value=DEFAULT_CONVERSATION)
     generate_btn = gr.Button("Generate conversation", variant="primary")
+    gr.Markdown("GPU time limited to 3 minutes, for longer usage duplicate the space.")
     audio_output = gr.Audio(label="Synthesized audio")
 
     generate_btn.click(

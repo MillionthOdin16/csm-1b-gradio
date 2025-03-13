@@ -1,7 +1,7 @@
 ---
 title: Sesame CSM
 emoji: 🌱
-colorFrom: green
+colorFrom: yellow
 colorTo: gray
 sdk: gradio
 sdk_version: 5.20.0

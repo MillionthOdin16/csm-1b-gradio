@@ -8,7 +8,7 @@ sdk_version: 5.20.0
 app_file: app.py
 pinned: false
 license: apache-2.0
-short_description: Contextual speech audio generation
+short_description: Conversational speech generation
 ---
 
 ## CSM 1B

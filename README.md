@@ -1,14 +1,14 @@
 ---
-title: Sesame CSM Space
-emoji: 🚀
-colorFrom: blue
-colorTo: blue
+title: Sesame CSM
+emoji: 🌱
+colorFrom: green
+colorTo: gray
 sdk: gradio
 sdk_version: 5.20.0
 app_file: app.py
 pinned: false
 license: apache-2.0
-short_description: Generation using Sesame's Conversational Speech Model
+short_description: Contextual speech audio generation
 ---
 
 ## CSM 1B

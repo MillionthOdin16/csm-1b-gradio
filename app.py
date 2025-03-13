@@ -22,7 +22,8 @@ Generate from CSM 1B (Conversational Speech Model).
 Code is available on GitHub: [SesameAILabs/csm](https://github.com/SesameAILabs/csm). 
 Checkpoint is [hosted on HuggingFace](https://huggingface.co/sesame/csm-1b).
 
-Try out the interactive demo of our fine-tuned model [sesame.com/voicedemo](https://www.sesame.com/voicedemo).
+Try out our interactive demo [sesame.com/voicedemo](https://www.sesame.com/voicedemo), 
+this uses a fine-tuned variant of CSM.
 
 The model has some capacity for non-English languages due to data contamination in the training 
 data, but it is likely not to perform well.

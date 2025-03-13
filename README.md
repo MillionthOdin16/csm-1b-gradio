@@ -15,15 +15,13 @@ short_description: Conversational speech generation
 
 **2025/03/13** - We are releasing the 1B CSM variant. Code is available on GitHub: [SesameAILabs/csm](https://github.com/SesameAILabs/csm). Checkpoint is [hosted on HuggingFace](https://huggingface.co/sesame/csm-1b).
 
-Try out the interactive demo of our fine-tuned version [sesame.com/voicedemo](https://www.sesame.com/voicedemo).
-
-Generate from the open-source base model [hosted on HuggingFace](https://huggingface.co/spaces/sesame/csm-1b).
-
 ---
 
-CSM (Conversational Speech Model) is a speech generation model from [Sesame](sesame.com) that generates RVQ audio codes from text and audio inputs. A fine-tuned version of this model powers the interactive demo in our [technical blog post](https://www.sesame.com/research/crossing_the_uncanny_valley_of_voice).
+CSM (Conversational Speech Model) is a speech generation model from [Sesame](sesame.com) that generates RVQ audio codes from text and audio inputs. The model architecture employs a [Llama](https://www.llama.com/) backbone and a smaller audio decoder that produces [Mimi](https://huggingface.co/kyutai/mimi) audio codes.
 
-The model architecture employs a [Llama](https://www.llama.com/) backbone and a smaller audio decoder that produces [Mimi](https://huggingface.co/kyutai/mimi) audio codes.
+A fine-tuned variant of CSM powers the [interactive voice demo](https://www.sesame.com/voicedemo) shown in our [blog post](https://www.sesame.com/research/crossing_the_uncanny_valley_of_voice).
+
+A hosted [HuggingFace space](https://huggingface.co/spaces/sesame/csm-1b) is also available for testing audio generation.
 
 ## Misuse and abuse ⚠️
 

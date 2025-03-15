@@ -1,8 +1,9 @@
-from dataclasses import dataclass
+from dataclasses import asdict, dataclass
 
 import torch
 import torch.nn as nn
 import torchtune
+from huggingface_hub import PyTorchModelHubMixin
 from torchtune.models import llama3_2
 
 
@@ -95,7 +96,20 @@ class ModelArgs:
     audio_num_codebooks: int
 
 
-class Model(nn.Module):
+class Model(
+    nn.Module,
+    PyTorchModelHubMixin,
+    repo_url="https://github.com/SesameAILabs/csm",
+    pipeline_tag="text-to-speech",
+    license="apache-2.0",
+    coders={
+      # Tells the class how to serialize and deserialize config.json
+      ModelArgs : (
+         lambda x: asdict(x),  # Encoder: how to convert a `ModelArgs` to a valid jsonable value?
+         lambda data: ModelArgs(**data),  # Decoder: how to reconstruct a `ModelArgs` from a dictionary?
+      )
+   }
+):
     def __init__(self, args: ModelArgs):
         super().__init__()
         self.args = args
@@ -110,7 +124,7 @@ class Model(nn.Module):
         self.codebook0_head = nn.Linear(backbone_dim, args.audio_vocab_size, bias=False)
         self.audio_head = nn.Parameter(torch.empty(args.audio_num_codebooks - 1, decoder_dim, args.audio_vocab_size))
 
-    def setup_caches(self, max_batch_size: int) -> torch.Tensor:
+    def setup_caches(self, max_batch_size: int) -> None:
         """Setup KV caches and return a causal mask."""
         dtype = next(self.parameters()).dtype
         device = next(self.parameters()).device

@@ -102,8 +102,7 @@ SPEAKER_PROMPTS = {
 }
 
 device = "cuda" if torch.cuda.is_available() else "cpu"
-model_path = hf_hub_download(repo_id="sesame/csm-1b", filename="ckpt.pt")
-generator = load_csm_1b(model_path, device)
+generator = load_csm_1b(device=device)
 
 
 @spaces.GPU(duration=gpu_timeout)
